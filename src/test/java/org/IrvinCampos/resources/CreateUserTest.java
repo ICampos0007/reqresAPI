@@ -18,7 +18,7 @@ public class CreateUserTest {
                 .header("Content-Type","application/json")
                 .header("x-api-key", utils.get("apiKey"))
                 .body(requestBody)
-                .when().post("/users")
+                .when().post("/api/users")
                 .then().statusCode(201).extract().asString();
 
        System.out.println(response);
