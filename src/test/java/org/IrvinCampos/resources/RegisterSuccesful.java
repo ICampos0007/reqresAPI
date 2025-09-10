@@ -16,14 +16,30 @@ public class RegisterSuccesful {
                         "    \"email\": \"eve.holt@reqres.in\",\n" +
                         "    \"password\": \"pistol\"\n" +
                         "}")
-                .when().post("/api/regist")
-                .then().statusCode(201).extract().asString();
+                .when().post("/api/register")
+                .then().statusCode(200).extract().asString();
         System.out.println(response);
 
         JsonPath jsonPath = new JsonPath(response);
+        System.out.println(response);
         String email = jsonPath.getString("email");
         String password = jsonPath.getString("password");
         System.out.println(email);
         System.out.println(password);
+
+//        register unsuccessful
+
+        String response2 = given().log().all().baseUri(utils.get("baseURL"))
+                .header("Content-Type","application/json")
+                .header("x-api-key", utils.get("apiKey"))
+                .body("{\n" +
+                        "    \"email\": \"sydney@fife\"\n" +
+                        "}")
+                .when().post("/api/register")
+                .then().statusCode(400).extract().asString();
+        System.out.println(response2);
+        JsonPath jsonPath2 = new JsonPath(response2);
+        String error = jsonPath2.getString("error");
+        System.out.println(error);
     }
 }
