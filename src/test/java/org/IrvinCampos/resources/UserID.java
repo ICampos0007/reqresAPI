@@ -20,5 +20,14 @@ public class UserID {
         System.out.println(response);
         int id = jsonPath.getInt("data.id");
         System.out.println(id);
+
+//        fail the user ID Test
+
+        String response2 = given().log().all().baseUri(utils.get("baseURL"))
+                .header("Content-Type","application/json")
+                .header("x-api-key", utils.get("apiKey"))
+                .when().get("https://reqres.in/api/users/rasf")
+                .then().statusCode(404).extract().asString();
+        System.out.println(response2);
     }
 }
