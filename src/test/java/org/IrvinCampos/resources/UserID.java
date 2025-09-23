@@ -28,6 +28,9 @@ public class UserID {
                 .header("x-api-key", utils.get("apiKey"))
                 .when().get("https://reqres.in/api/users/rasf")
                 .then().statusCode(404).extract().asString();
+        JsonPath jsonPath2 = new JsonPath(response);
         System.out.println(response2);
+        int id2 = jsonPath2.getInt("data.id");
+        System.out.println(id2);
     }
 }
